@@ -66,7 +66,7 @@ public class UserPosDAO {
 	// Search
 	public Userposjava1 search(Long id) throws Exception {
 
-		Userposjava1 returns = new  Userposjava1();
+		Userposjava1 returns = new Userposjava1();
 
 		String sql = "select * from userposjava1 where id = " + id;
 
@@ -74,15 +74,34 @@ public class UserPosDAO {
 		ResultSet result = statement.executeQuery();
 
 		while (result.next()) { // return one or none
-			//Userposjava1 userposjava1 = new Userposjava1();
+			// Userposjava1 userposjava1 = new Userposjava1();
 			returns.setId(result.getLong("id"));
 			returns.setName(result.getString("name"));
 			returns.setEmail(result.getString("email"));
 
-	
 		}
 
 		return returns;
+	}
+
+	// Update function
+	public void update(Userposjava1 userposjava1) {
+		try {
+			String sql = "update userposjava1 set name = ? where id = " + userposjava1.getId();
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, userposjava1.getName());
+
+			statement.execute();
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {		
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 	}
 
 }
