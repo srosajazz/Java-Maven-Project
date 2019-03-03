@@ -38,6 +38,8 @@ public class TestdbJdbc {
 		}
 	}
 
+	//Search
+	
 	@Test
 	public void initSearch() {
 
@@ -54,6 +56,7 @@ public class TestdbJdbc {
 	}
 
 	// Update
+	
 	@Test
 	public void initUpdated() {
 		try {
@@ -70,4 +73,37 @@ public class TestdbJdbc {
 			
 		}
 	}
+	
+	//Delete
+	
+	@Test
+	public void initDelete() {
+		
+		try {
+			
+			UserPosDAO dao = new UserPosDAO();
+			dao.delete(6L);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

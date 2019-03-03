@@ -19,6 +19,7 @@ public class UserPosDAO {
 		connection = SingleConnection.getConnection();
 	}
 
+	//Save
 	public void save(Userposjava1 userposjava1) {
 		try {
 			String sql = "insert into userposjava1 (id, name, email) values (?,?,?)";
@@ -41,7 +42,6 @@ public class UserPosDAO {
 	}
 
 	// List of object return
-
 	public List<Userposjava1> listar() throws Exception {
 
 		List<Userposjava1> listas = new ArrayList<Userposjava1>();
@@ -97,11 +97,31 @@ public class UserPosDAO {
 		} catch (Exception e) {
 			try {
 				connection.rollback();
-			} catch (SQLException e1) {		
+			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		}
+	}
+
+	// Delete function
+	public void delete(Long id) {
+		try {
+				
+			String sql = "delete from userposjava1 where id =  " + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.execute();
+			connection.commit();
+
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+
 	}
 
 }
